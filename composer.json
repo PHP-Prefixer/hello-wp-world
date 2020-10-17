@@ -1,0 +1,19 @@
+{
+    "name": "php-prefixer/hello-prefixed-world-for-wp",
+    "description": "Hello Prefixed World plugin for WordPress. A plugin to showcase the PHP-Prefixer service. Install any library freely. PHP-Prefixer will manage your namespaces.",
+    "require": {
+        "illuminate/support": "^8.10"
+    },
+    "extra": {
+        "php-prefixer": {
+            "projectName": "Hello Prefixed World for WordPress",
+            "prefixForNamespaces": "PPP",
+            "prefixForGlobalObjects": "PPP_",
+            "excludePaths": [
+                "bin/",
+                "doctrine/inflector/docs",
+                "voku/portable-ascii/build"
+            ]
+        }
+    }
+}
