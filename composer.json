@@ -6,10 +6,10 @@
     },
     "extra": {
         "php-prefixer": {
-            "projectName": "Hello Prefixed World for WordPress",
-            "prefixForNamespaces": "PPP",
-            "prefixForGlobalObjects": "PPP_",
-            "excludePaths": [
+            "project-name": "Hello Prefixed World for WordPress",
+            "namespaces-prefix": "PPP",
+            "global-scope-prefix": "PPP_",
+            "exclude-paths": [
                 "bin/",
                 "doctrine/inflector/docs",
                 "voku/portable-ascii/build"
