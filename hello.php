@@ -1,4 +1,5 @@
 <?php
+/* This file has been prefixed by <PHP-Prefixer> for "Hello Prefixed World for WordPress" */
 
 /**
  * @package Hello_Prefixed_World_For_Wp
@@ -62,7 +63,7 @@ function hello_dolly() {
 	}
 
 	// The modified version of the Hello Dolly plugin shows a formatted date before the lyrics
-	$now = \Carbon\Carbon::now();
+	$now = \PPP\Carbon\Carbon::now();
 	$formattedDate = $now->toDateTimeString();
 
 	printf(
