@@ -1,4 +1,5 @@
-<?php /* This file has been prefixed by <PHP-Prefixer> for "Hello Prefixed World for WordPress" */
+<?php
+/* This file has been prefixed by <PHP-Prefixer> for "Hello Prefixed World for WordPress" */
 
 namespace PPP\Illuminate\Contracts\Container;
 
@@ -15,7 +16,7 @@ interface ContextualBindingBuilder
     /**
      * Define the implementation for the contextual binding.
      *
-     * @param  \Closure|string  $implementation
+     * @param  \Closure|string|array  $implementation
      * @return void
      */
     public function give($implementation);

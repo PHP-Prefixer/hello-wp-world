@@ -1,9 +1,10 @@
-<?php /* This file has been prefixed by <PHP-Prefixer> for "Hello Prefixed World for WordPress" */
+<?php
+/* This file has been prefixed by <PHP-Prefixer> for "Hello Prefixed World for WordPress" */
 
 namespace PPP\Illuminate\Contracts\Container;
 
 use Closure;
-use Psr\Container\ContainerInterface;
+use PPP\Psr\Container\ContainerInterface;
 
 interface Container extends ContainerInterface
 {

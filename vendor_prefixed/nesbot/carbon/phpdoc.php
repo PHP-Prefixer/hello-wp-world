@@ -136,7 +136,7 @@ foreach ($tags as $tag) {
         [$tag, $pattern] = $tag;
     }
 
-    $pattern = isset($pattern) ? $pattern : '\S+';
+    $pattern = $pattern ?? '\S+';
 
     if ($tag === PHP_EOL) {
         $autoDocLines[] = '';

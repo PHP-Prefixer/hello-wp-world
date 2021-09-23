@@ -1,8 +1,8 @@
-<?php
+<?php /* This file has been prefixed by <PHP-Prefixer> for "Hello Prefixed World for WordPress" */
 
 declare(strict_types=1);
 
-namespace Psr\Container;
+namespace PPP\Psr\Container;
 
 /**
  * Describes the interface of a container that exposes methods to read its entries.

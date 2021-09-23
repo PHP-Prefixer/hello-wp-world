@@ -1,4 +1,5 @@
-<?php /* This file has been prefixed by <PHP-Prefixer> for "Hello Prefixed World for WordPress" */
+<?php
+/* This file has been prefixed by <PHP-Prefixer> for "Hello Prefixed World for WordPress" */
 
 namespace PPP\Illuminate\Contracts\Foundation;
 
@@ -24,7 +25,7 @@ interface Application extends Container
     /**
      * Get the path to the bootstrap directory.
      *
-     * @param  string  $path Optionally, a path to append to the bootstrap path
+     * @param  string  $path
      * @return string
      */
     public function bootstrapPath($path = '');
@@ -32,7 +33,7 @@ interface Application extends Container
     /**
      * Get the path to the application configuration files.
      *
-     * @param  string  $path Optionally, a path to append to the config path
+     * @param  string  $path
      * @return string
      */
     public function configPath($path = '');
@@ -40,7 +41,7 @@ interface Application extends Container
     /**
      * Get the path to the database directory.
      *
-     * @param  string  $path Optionally, a path to append to the database path
+     * @param  string  $path
      * @return string
      */
     public function databasePath($path = '');

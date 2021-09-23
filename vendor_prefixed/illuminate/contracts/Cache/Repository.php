@@ -1,9 +1,10 @@
-<?php /* This file has been prefixed by <PHP-Prefixer> for "Hello Prefixed World for WordPress" */
+<?php
+/* This file has been prefixed by <PHP-Prefixer> for "Hello Prefixed World for WordPress" */
 
 namespace PPP\Illuminate\Contracts\Cache;
 
 use Closure;
-use Psr\SimpleCache\CacheInterface;
+use PPP\Psr\SimpleCache\CacheInterface;
 
 interface Repository extends CacheInterface
 {
