@@ -7,13 +7,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
       - name: Run PHP-Prefixer
-        uses: PHP-Prefixer/php-prefixer-build-action@main
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: PHP-Prefixer/php-prefixer-build-action@next-typescript-action
         with:
           personal_access_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           project_id: ${{ secrets.PROJECT_ID }}
+          token: ${{ secrets.GITHUB_TOKEN }}
