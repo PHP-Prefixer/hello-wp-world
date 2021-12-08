@@ -218,7 +218,7 @@ class DateFactory
             return $dateClass::$method(...$parameters);
         }
 
-        // If that fails, create the date with the default class...
+        // If that fails, create the date with the default class..
         $date = $defaultClassName::$method(...$parameters);
 
         // If the configured class has an "instance" method, we'll try to pass our date into there...

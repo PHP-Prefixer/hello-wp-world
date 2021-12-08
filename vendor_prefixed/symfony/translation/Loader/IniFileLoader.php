@@ -22,7 +22,7 @@ class IniFileLoader extends FileLoader
     /**
      * {@inheritdoc}
      */
-    protected function loadResource(string $resource)
+    protected function loadResource($resource)
     {
         return parse_ini_file($resource, true);
     }

@@ -5,7 +5,7 @@ namespace PPP\Illuminate\Support\Facades;
 
 use Closure;
 use Mockery;
-use Mockery\LegacyMockInterface;
+use Mockery\MockInterface;
 use RuntimeException;
 
 abstract class Facade
@@ -127,7 +127,7 @@ abstract class Facade
         $name = static::getFacadeAccessor();
 
         return isset(static::$resolvedInstance[$name]) &&
-               static::$resolvedInstance[$name] instanceof LegacyMockInterface;
+               static::$resolvedInstance[$name] instanceof MockInterface;
     }
 
     /**

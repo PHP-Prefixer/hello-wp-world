@@ -102,7 +102,7 @@ if (! function_exists('e')) {
     /**
      * Encode HTML special characters in a string.
      *
-     * @param  \Illuminate\Contracts\Support\DeferringDisplayableValue|\Illuminate\Contracts\Support\Htmlable|string|null  $value
+     * @param  \Illuminate\Contracts\Support\DeferringDisplayableValue|\Illuminate\Contracts\Support\Htmlable|string  $value
      * @param  bool  $doubleEncode
      * @return string
      */
@@ -116,7 +116,7 @@ if (! function_exists('e')) {
             return $value->toHtml();
         }
 
-        return htmlspecialchars($value ?? '', ENT_QUOTES, 'UTF-8', $doubleEncode);
+        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', $doubleEncode);
     }
 }
 
@@ -158,7 +158,7 @@ if (! function_exists('PPP_object_get')) {
      */
     function PPP_object_get($object, $key, $default = null)
     {
-        if (is_null($key) || trim($key) === '') {
+        if (is_null($key) || trim($key) == '') {
             return $object;
         }
 
@@ -217,13 +217,13 @@ if (! function_exists('PPP_retry')) {
      *
      * @param  int  $times
      * @param  callable  $callback
-     * @param  int|\Closure  $sleepMilliseconds
+     * @param  int  $sleep
      * @param  callable|null  $when
      * @return mixed
      *
      * @throws \Exception
      */
-    function PPP_retry($times, callable $callback, $sleepMilliseconds = 0, $when = null)
+    function PPP_retry($times, callable $callback, $sleep = 0, $when = null)
     {
         $attempts = 0;
 
@@ -238,8 +238,8 @@ if (! function_exists('PPP_retry')) {
                 throw $e;
             }
 
-            if ($sleepMilliseconds) {
-                usleep(PPP_value($sleepMilliseconds, $attempts) * 1000);
+            if ($sleep) {
+                usleep($sleep * 1000);
             }
 
             goto beginning;
@@ -273,19 +273,15 @@ if (! function_exists('PPP_throw_if')) {
      *
      * @param  mixed  $condition
      * @param  \Throwable|string  $exception
-     * @param  mixed  ...$parameters
+     * @param  array  ...$parameters
      * @return mixed
      *
      * @throws \Throwable
      */
-    function PPP_throw_if($condition, $exception = 'RuntimeException', ...$parameters)
+    function PPP_throw_if($condition, $exception, ...$parameters)
     {
         if ($condition) {
-            if (is_string($exception) && class_exists($exception)) {
-                $exception = new $exception(...$parameters);
-            }
-
-            throw is_string($exception) ? new RuntimeException($exception) : $exception;
+            throw (is_string($exception) ? new $exception(...$parameters) : $exception);
         }
 
         return $condition;
@@ -298,14 +294,16 @@ if (! function_exists('PPP_throw_unless')) {
      *
      * @param  mixed  $condition
      * @param  \Throwable|string  $exception
-     * @param  mixed  ...$parameters
+     * @param  array  ...$parameters
      * @return mixed
      *
      * @throws \Throwable
      */
-    function PPP_throw_unless($condition, $exception = 'RuntimeException', ...$parameters)
+    function PPP_throw_unless($condition, $exception, ...$parameters)
     {
-        PPP_throw_if(! $condition, $exception, ...$parameters);
+        if (! $condition) {
+            throw (is_string($exception) ? new $exception(...$parameters) : $exception);
+        }
 
         return $condition;
     }
@@ -320,7 +318,7 @@ if (! function_exists('PPP_trait_uses_recursive')) {
      */
     function PPP_trait_uses_recursive($trait)
     {
-        $traits = class_uses($trait) ?: [];
+        $traits = class_uses($trait);
 
         foreach ($traits as $trait) {
             $traits += PPP_trait_uses_recursive($trait);

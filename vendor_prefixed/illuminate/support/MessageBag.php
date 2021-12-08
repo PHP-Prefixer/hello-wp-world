@@ -3,13 +3,14 @@
 
 namespace PPP\Illuminate\Support;
 
+use Countable;
 use PPP\Illuminate\Contracts\Support\Arrayable;
 use PPP\Illuminate\Contracts\Support\Jsonable;
 use PPP\Illuminate\Contracts\Support\MessageBag as MessageBagContract;
 use PPP\Illuminate\Contracts\Support\MessageProvider;
 use JsonSerializable;
 
-class MessageBag implements Jsonable, JsonSerializable, MessageBagContract, MessageProvider
+class MessageBag implements Arrayable, Countable, Jsonable, JsonSerializable, MessageBagContract, MessageProvider
 {
     /**
      * All of the registered messages.
@@ -367,7 +368,6 @@ class MessageBag implements Jsonable, JsonSerializable, MessageBagContract, Mess
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->messages, COUNT_RECURSIVE) - count($this->messages);
@@ -388,7 +388,6 @@ class MessageBag implements Jsonable, JsonSerializable, MessageBagContract, Mess
      *
      * @return array
      */
-    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->toArray();

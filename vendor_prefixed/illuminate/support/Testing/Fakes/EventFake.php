@@ -8,7 +8,6 @@ use PPP\Illuminate\Contracts\Events\Dispatcher;
 use PPP\Illuminate\Support\Arr;
 use PPP\Illuminate\Support\Traits\ReflectsClosures;
 use PHPUnit\Framework\Assert as PHPUnit;
-use ReflectionFunction;
 
 class EventFake implements Dispatcher
 {
@@ -47,38 +46,6 @@ class EventFake implements Dispatcher
         $this->dispatcher = $dispatcher;
 
         $this->eventsToFake = Arr::wrap($eventsToFake);
-    }
-
-    /**
-     * Assert if an event has a listener attached to it.
-     *
-     * @param  string  $expectedEvent
-     * @param  string  $expectedListener
-     * @return void
-     */
-    public function assertListening($expectedEvent, $expectedListener)
-    {
-        foreach ($this->dispatcher->getListeners($expectedEvent) as $listenerClosure) {
-            $actualListener = (new ReflectionFunction($listenerClosure))
-                        ->getStaticVariables()['listener'];
-
-            if ($actualListener === $expectedListener ||
-                ($actualListener instanceof Closure &&
-                $expectedListener === Closure::class)) {
-                PHPUnit::assertTrue(true);
-
-                return;
-            }
-        }
-
-        PHPUnit::assertTrue(
-            false,
-            sprintf(
-                'Event [%s] does not have the [%s] listener attached to it',
-                $expectedEvent,
-                print_r($expectedListener, true)
-            )
-        );
     }
 
     /**
@@ -137,21 +104,6 @@ class EventFake implements Dispatcher
         PHPUnit::assertCount(
             0, $this->dispatched($event, $callback),
             "The unexpected [{$event}] event was dispatched."
-        );
-    }
-
-    /**
-     * Assert that no events were dispatched.
-     *
-     * @return void
-     */
-    public function assertNothingDispatched()
-    {
-        $count = count(Arr::flatten($this->events));
-
-        PHPUnit::assertSame(
-            0, $count,
-            "{$count} unexpected events were dispatched."
         );
     }
 
@@ -312,7 +264,7 @@ class EventFake implements Dispatcher
      *
      * @param  string|object  $event
      * @param  mixed  $payload
-     * @return array|null
+     * @return void
      */
     public function until($event, $payload = [])
     {

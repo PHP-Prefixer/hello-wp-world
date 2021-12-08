@@ -171,7 +171,7 @@ class ConfigurationUrlParser
     }
 
     /**
-     * Get all of the current drivers' aliases.
+     * Get all of the current drivers aliases.
      *
      * @return array
      */

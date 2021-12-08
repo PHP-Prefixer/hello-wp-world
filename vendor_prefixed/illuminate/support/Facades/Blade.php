@@ -27,7 +27,6 @@ namespace PPP\Illuminate\Support\Facades;
  * @method static void withDoubleEncoding()
  * @method static void withoutComponentTags()
  * @method static void withoutDoubleEncoding()
- * @method static void stringable(string|callable $class, callable|null $handler = null)
  *
  * @see \Illuminate\View\Compilers\BladeCompiler
  */

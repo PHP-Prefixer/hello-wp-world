@@ -180,8 +180,8 @@ if (! function_exists('PPP_value')) {
      * @param  mixed  $value
      * @return mixed
      */
-    function PPP_value($value, ...$args)
+    function PPP_value($value)
     {
-        return $value instanceof Closure ? $value(...$args) : $value;
+        return $value instanceof Closure ? $value() : $value;
     }
 }

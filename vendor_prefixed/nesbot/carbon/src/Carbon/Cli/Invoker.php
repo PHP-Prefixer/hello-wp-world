@@ -5,7 +5,7 @@ namespace PPP\Carbon\Cli;
 
 class Invoker
 {
-    public const CLI_CLASS_NAME = 'PPP\\Carbon\\Cli';
+    const CLI_CLASS_NAME = 'PPP\\Carbon\\Cli';
 
     protected function runWithCli(string $className, array $parameters): bool
     {

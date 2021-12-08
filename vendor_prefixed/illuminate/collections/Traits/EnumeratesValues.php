@@ -36,11 +36,7 @@ use Traversable;
  * @property-read HigherOrderCollectionProxy $some
  * @property-read HigherOrderCollectionProxy $sortBy
  * @property-read HigherOrderCollectionProxy $sortByDesc
- * @property-read HigherOrderCollectionProxy $skipUntil
- * @property-read HigherOrderCollectionProxy $skipWhile
  * @property-read HigherOrderCollectionProxy $sum
- * @property-read HigherOrderCollectionProxy $takeUntil
- * @property-read HigherOrderCollectionProxy $takeWhile
  * @property-read HigherOrderCollectionProxy $unique
  * @property-read HigherOrderCollectionProxy $until
  */
@@ -202,7 +198,7 @@ trait EnumeratesValues
      */
     public function dd(...$args)
     {
-        $this->dump(...$args);
+        call_user_func_array([$this, 'dump'], $args);
 
         exit(1);
     }
@@ -670,24 +666,14 @@ trait EnumeratesValues
     }
 
     /**
-     * Filter the items, removing any items that don't match the given type(s).
+     * Filter the items, removing any items that don't match the given type.
      *
-     * @param  string|string[]  $type
+     * @param  string  $type
      * @return static
      */
     public function whereInstanceOf($type)
     {
         return $this->filter(function ($value) use ($type) {
-            if (is_array($type)) {
-                foreach ($type as $classType) {
-                    if ($value instanceof $classType) {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
             return $value instanceof $type;
         });
     }
@@ -725,36 +711,6 @@ trait EnumeratesValues
         $callback(clone $this);
 
         return $this;
-    }
-
-    /**
-     * Reduce the collection to a single value.
-     *
-     * @param  callable  $callback
-     * @param  mixed  $initial
-     * @return mixed
-     */
-    public function reduce(callable $callback, $initial = null)
-    {
-        $result = $initial;
-
-        foreach ($this as $key => $value) {
-            $result = $callback($result, $value, $key);
-        }
-
-        return $result;
-    }
-
-    /**
-     * Reduce an associative collection to a single value.
-     *
-     * @param  callable  $callback
-     * @param  mixed  $initial
-     * @return mixed
-     */
-    public function reduceWithKeys(callable $callback, $initial = null)
-    {
-        return $this->reduce($callback, $initial);
     }
 
     /**
@@ -834,7 +790,6 @@ trait EnumeratesValues
      *
      * @return array
      */
-    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return array_map(function ($value) {

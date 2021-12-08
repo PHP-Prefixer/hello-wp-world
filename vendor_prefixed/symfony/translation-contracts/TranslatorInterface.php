@@ -13,8 +13,6 @@ namespace PPP\Symfony\Contracts\Translation;
 
 /**
  * @author Fabien Potencier <fabien@symfony.com>
- *
- * @method string getLocale() Returns the default locale
  */
 interface TranslatorInterface
 {

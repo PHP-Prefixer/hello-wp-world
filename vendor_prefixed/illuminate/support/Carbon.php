@@ -4,16 +4,8 @@
 namespace PPP\Illuminate\Support;
 
 use PPP\Carbon\Carbon as BaseCarbon;
-use PPP\Carbon\CarbonImmutable as BaseCarbonImmutable;
 
 class Carbon extends BaseCarbon
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function setTestNow($testNow = null)
-    {
-        BaseCarbon::setTestNow($testNow);
-        BaseCarbonImmutable::setTestNow($testNow);
-    }
+    //
 }

@@ -16,7 +16,7 @@ interface Dispatcher
     /**
      * Dispatch a command to its appropriate handler in the current process.
      *
-     * Queueable jobs will be dispatched to the "sync" queue.
+     * Queuable jobs will be dispatched to the "sync" queue.
      *
      * @param  mixed  $command
      * @param  mixed  $handler

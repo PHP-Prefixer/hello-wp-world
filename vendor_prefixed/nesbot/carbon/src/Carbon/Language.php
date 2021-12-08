@@ -12,7 +12,6 @@
 namespace PPP\Carbon;
 
 use JsonSerializable;
-use ReturnTypeWillChange;
 
 class Language implements JsonSerializable
 {
@@ -334,7 +333,6 @@ class Language implements JsonSerializable
      *
      * @return string
      */
-    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->getIsoDescription();

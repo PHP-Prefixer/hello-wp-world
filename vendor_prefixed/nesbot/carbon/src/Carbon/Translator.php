@@ -149,7 +149,7 @@ class Translator extends Translation\Translator
      */
     public function trans($id, array $parameters = [], $domain = null, $locale = null)
     {
-        if ($domain === null) {
+        if (null === $domain) {
             $domain = 'messages';
         }
 
@@ -166,7 +166,7 @@ class Translator extends Translation\Translator
 
             return $format(
                 ...array_values($parameters),
-                ...array_fill(0, max(0, $count - \count($parameters)), null)
+                ...array_fill(0, max(0, $count - count($parameters)), null)
             );
         }
 
@@ -273,7 +273,7 @@ class Translator extends Translation\Translator
         $this->loadMessagesFromFile($locale);
         $this->addResource('array', $messages, $locale);
         $this->messages[$locale] = array_merge(
-            $this->messages[$locale] ?? [],
+            isset($this->messages[$locale]) ? $this->messages[$locale] : [],
             $messages
         );
 
@@ -314,11 +314,11 @@ class Translator extends Translation\Translator
      */
     public function setLocale($locale)
     {
-        $locale = preg_replace_callback('/[-_]([a-z]{2,}|[0-9]{2,})/', function ($matches) {
+        $locale = preg_replace_callback('/[-_]([a-z]{2,})/', function ($matches) {
             // _2-letters or YUE is a region, _3+-letters is a variant
             $upper = strtoupper($matches[1]);
 
-            if ($upper === 'YUE' || $upper === 'ISO' || \strlen($upper) < 3) {
+            if ($upper === 'YUE' || $upper === 'ISO' || strlen($upper) < 3) {
                 return "_$upper";
             }
 
@@ -327,7 +327,7 @@ class Translator extends Translation\Translator
 
         $previousLocale = $this->getLocale();
 
-        if ($previousLocale === $locale && isset($this->messages[$locale])) {
+        if ($previousLocale === $locale) {
             return true;
         }
 
@@ -356,7 +356,7 @@ class Translator extends Translation\Translator
         }
 
         // If subtag (ex: en_CA) first load the macro (ex: en) to have a fallback
-        if (str_contains($locale, '_') &&
+        if (strpos($locale, '_') !== false &&
             $this->loadMessagesFromFile($macroLocale = preg_replace('/^([^_]+).*$/', '$1', $locale))
         ) {
             parent::setLocale($macroLocale);
