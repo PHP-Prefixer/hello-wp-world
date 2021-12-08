@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Run PHP-Prefixer
-        uses: PHP-Prefixer/php-prefixer-build-action@v1
+        uses: PHP-Prefixer/php-prefixer-build-action@v1.0.0
         with:
           personal_access_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           project_id: ${{ secrets.PROJECT_ID }}
